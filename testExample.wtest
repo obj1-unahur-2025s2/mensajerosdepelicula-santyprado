@@ -18,7 +18,7 @@ describe "Test de la primera parte: mensajeros y destinos" {
   }
 
   test "neo con crédito no puede llevar un paquete que no está pago a la matrix." {
-    neo.credito(false)
+    neo.credito(true)
     paquete.pagado(false)
     assert.notThat(laMatrix.puedePasar(neo))
   }
