@@ -1,5 +1,12 @@
+import destinos.*
+import paquetes.*
+
 object roberto {
   var vehiculo = bicicleta
+
+  method cambiarVehiculo(unVehiculo){
+    vehiculo = unVehiculo
+  }
   method puedeLlamar() = false
   var pesoPropio = 100
   method peso(unPeso) {
@@ -8,6 +15,9 @@ object roberto {
   method pesoTotal(){
     return pesoPropio + vehiculo.pesoExtra()
   }
+  method puedeEntregarPaquete(unPaquete){
+    return unPaquete.estaPago() and unPaquete.destino().puedePasar(self)
+  } 
 }
 object bicicleta{
   method pesoExtra()=5
@@ -24,7 +34,11 @@ object camion{
 
 object chuckNorris{
   method pesoTotal() = 80
-  method puedeLlamar()=true 
+  method puedeLlamar()=true
+  method puedeEntregarPaquete(unPaquete){
+    return unPaquete.estaPago() and unPaquete.destino().puedePasar(self)
+  } 
+  
 }
 
 object neo{
@@ -34,12 +48,9 @@ object neo{
     tieneCredito = unValor
   }
   method puedeLlamar() =tieneCredito
+  method puedeEntregarPaquete(unPaquete){
+    return unPaquete.estaPago() and unPaquete.destino().puedePasar(self)
+  } 
 }
 
-object paquete {
-  var estaPagado = false
-  method pagado(unValor){
-    estaPagado = unValor
-  }
-  method estaPago()=estaPagado
-}
+
